@@ -1,0 +1,57 @@
+{
+  "name": "gcr-vendrix-api",
+  "version": "1.0.0",
+  "description": "Vendrix API Version 2.0",
+  "main": "server.ts",
+  "repository": "git@github.com:Vendrix-Inc/gcr-vendrix-api.git",
+  "author": "David Stewart <david@vendrix.co>",
+  "license": "MIT",
+  "scripts": {
+    "start": "NODE_PATH=./build node build/server.js",
+    "dev": "nodemon --inspect src/server.ts",
+    "build": "tsc -p ."
+  },
+  "private": true,
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/express-jwt": "^6.0.4",
+    "@types/hpp": "^0.2.2",
+    "@types/module-alias": "^2.0.1",
+    "@types/morgan": "^1.9.3",
+    "@typescript-eslint/eslint-plugin": "^5.8.1",
+    "@typescript-eslint/parser": "^5.8.1",
+    "eslint": "^8.5.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.5.1",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "@google-cloud/error-reporting": "^2.0.4",
+    "@google-cloud/logging": "^9.6.6",
+    "@google-cloud/logging-winston": "^4.1.1",
+    "@google-cloud/secret-manager": "^3.10.1",
+    "bson": "^4.6.0",
+    "date-fns": "^2.28.0",
+    "decimal.js": "^10.3.1",
+    "express": "^4.17.2",
+    "express-jwt": "^6.1.0",
+    "helmet": "^4.6.0",
+    "hpp": "^0.2.3",
+    "jwks-rsa": "^2.0.5",
+    "module-alias": "^2.2.2",
+    "mongodb": "^4.2.2",
+    "mongodb-client-encryption": "^2.0.0-beta.2",
+    "morgan": "^1.10.0",
+    "nodemon": "2.0.13",
+    "winston": "^3.3.3",
+    "winston-transport": "^4.4.1"
+  },
+  "_moduleAliases": {
+    "@middleware": "build/middleware",
+    "@errors": "build/errors",
+    "@api": "build/api",
+    "@routes": "build/routes"
+  }
+}

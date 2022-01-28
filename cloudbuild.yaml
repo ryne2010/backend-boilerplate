@@ -1,0 +1,53 @@
+# Build new Docker Image (DO NOT EDIT)
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Build'
+    args:
+      [
+        'build',
+        '--target',
+        '$_TARGET',
+        '-t',
+        'us-central1-docker.pkg.dev/$PROJECT_ID/gcr-vendrix-dev/gcr-vendrix-api:$_TARGET-$SHORT_SHA',
+        '.',
+      ]
+  # Push to Artifact Registry (DO NOT EDIT)
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push'
+    args:
+      [
+        'push',
+        'us-central1-docker.pkg.dev/$PROJECT_ID/gcr-vendrix-dev/gcr-vendrix-api:$_TARGET-$SHORT_SHA',
+      ]
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      [
+        'run',
+        'deploy',
+        'gcr-vendrix-api-$_TARGET',
+        '--project',
+        '$PROJECT_ID',
+        '--image',
+        'us-central1-docker.pkg.dev/$PROJECT_ID/gcr-vendrix-dev/gcr-vendrix-api:$_TARGET-$SHORT_SHA',
+        '--region',
+        'us-central1',
+        '--platform',
+        'managed',
+        '--port',
+        '8080',
+        '--cpu',
+        '1',
+        '--memory',
+        '256Mi',
+        '--concurrency',
+        '80',
+        '--timeout',
+        '300',
+        '--service-account',
+        '$_SERVICE_ACCOUNT',
+        '--clear-env-vars',
+        '--no-allow-unauthenticated',
+        '--vpc-connector',
+        'projects/$PROJECT_ID/locations/us-central1/connectors/$_VPC_PEER',
+      ]

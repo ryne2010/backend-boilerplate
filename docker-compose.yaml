@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  vendrix-api-2:
+    #platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: dev
+    volumes:
+      - .:/app:delegated #bind mount the local files over what is copied in the docker file
+      - ./node_modules/:/app/node_modules:delegated #bind mount nodemodules as the typescript bindmount only handles src folder
+      - ./nodemon.json:/app/nodemon.json
+      - ../cred:/credentials:ro #bind mount the credentials wtih read only
+    container_name: vendrix-api-2
+    expose:
+      - '8080'
+    ports:
+      - '8080:8080'
+      - 9230:9230 #Open the port for the debugger
+    command: yarn run dev
+    environment:
+      NODE_ENV: development #put the system in to dev mode
+      GOOGLE_APPLICATION_CREDENTIALS: ../credentials/vendrix-dev-70a7638291cd.json
+      REDISHOST: host.docker.internal
+      PORT: 8080
+      GCP_PROJECT_CONFIG: projects/823553870491
+      ROARR_LOG: false #Logging for LightShip

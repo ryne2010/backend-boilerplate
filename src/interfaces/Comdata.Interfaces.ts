@@ -1,0 +1,83 @@
+// Modules
+import { ObjectId, Decimal128, Int32 } from 'bson';
+
+// ***************************************************************************************
+export interface IComdataCardEvent {
+  _id: ObjectId;
+  customerName: string;
+  transactionDate: string;
+  transactionTime: string;
+  transactionType: string;
+  cardholderName: string;
+  declineCode: string;
+  mccGroup: string;
+  mccNumber: string;
+  mccDescription: string;
+  acceptLocation: string;
+  preAuthAmount: Decimal128;
+  postedAmount: Decimal128;
+  approvalCode: Int32;
+  reversalFlag: string;
+  cardToken: string;
+  surcharge: Decimal128;
+  posEModeDesc: string;
+  idMatchNumber: string;
+  webHook: boolean;
+  vendrixIngressDate: Date;
+  transactionTimeStamp: Date;
+  transactionTimeStampUTC: Date;
+  entryDescription: string;
+  matchTime: Date;
+  type: string;
+  entryType: Int32;
+  // Optional
+  postedDate?: string;
+  postedTime?: string;
+  merchantName?: string;
+  merchantAddress?: string;
+  merchantCity?: string;
+  merchantState?: string;
+  merchantZip?: string;
+  transactionFees?: Decimal128;
+}
+
+export interface IComdataTransactionEvent {
+  _id: string;
+  comDataId: string;
+  acceptLocation: string;
+  acceptorId: string;
+  accountName: string;
+  acquirerId: string;
+  approvalCode: Int32;
+  authorizationTime: string;
+  bin: string;
+  cardHolderFirstName: string;
+  cardHolderLastName: string;
+  cardHolderName: string;
+  cardToken: string;
+  change: string;
+  changeTime: string;
+  changeType: string;
+  creationTime: string;
+  entryDescription: string;
+  entryType: Int32;
+  event: string;
+  idMatchNumber: string;
+  matchTime: string;
+  mcc: string;
+  mccDescription: string;
+  mccGroup: Int32;
+  mccNumber: Int32;
+  name: string;
+  postedAmount: Decimal128;
+  preAuthAmount: Decimal128;
+  reversalFlag: string;
+  token: string;
+  transactionDate: string;
+  transactionTime: string;
+  transactionTimeStampUTC: string;
+  transactionType: string;
+  type: string;
+  vendrixIngressDate: string;
+  webHook: true;
+}
